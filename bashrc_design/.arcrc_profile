@@ -19,7 +19,7 @@ alias gd="git diff";
 
 
 
-# Function aliases
+# Local Function aliases
 alias trello="trello_open";
 alias proj="project_open";
 alias projc="project_open_with_code";
@@ -79,3 +79,10 @@ function project_open_with_code () {
         cd $PROJECTS_HOME/"Engineering" && code .;
     fi
 } 
+
+
+function reload() {
+    source "$HOME"/.bash_profile;
+    clear;
+}
+
