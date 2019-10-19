@@ -14,14 +14,28 @@ alias gph="git push";
 alias gbc="git checkout";
 alias gbcn="git checkout -b";
 alias gb="git branch";
+alias gl="git log";
+alias gd="git diff";
+
 
 
 # Function aliases
-alias trello=trello_open
-alias proj=project_open
+alias trello="trello_open";
+alias proj="project_open";
+alias projc="project_open_with_code";
 
 
-# Functions
+# Helper Functions
+
+function is_github_repo () {
+    if $(git rev-parse --is-inside-work-tree 2&1>/dev/null); then
+        return 0
+    else
+        return 1
+    fi
+}
+
+
 function trello_open () {
     
     projectName="$1"
@@ -35,22 +49,33 @@ function trello_open () {
 }
 
 
-function project_open () {
-    
+function project_open () {  
     projectName="$1"
     if [ "$projectName" = "compilers" ] || [ "$projectName" = "cmp" ]; then
-        cd $PROJECTS_HOME/"compilers"
+        cd $PROJECTS_HOME/"compilers";
+        if is_github_repo;then
+            echo "Found existing github repo..."
+            git log;
+        fi
+
     fi
     if [ "$projectName" = "eng" ] || [ "$projectName" = "engineering" ]; then
         cd $PROJECTS_HOME/"Engineering"
+        if is_github_repo;then    
+            echo "here" 
+            echo "Found existing github repo..."
+            git log;
+        fi
     fi
 } 
 
+function project_open_with_code () {  
+    projectName="$1"
+    if [ "$projectName" = "compilers" ] || [ "$projectName" = "cmp" ]; then
+        cd $PROJECTS_HOME/"compilers" && code .;
 
-function is_github_repo () {
-    if [ -d .git ]; then
-        echo .git;
-    else
-        git rev-parse --git-dir 2> /dev/null;
-    fi;
-}
+    fi
+    if [ "$projectName" = "eng" ] || [ "$projectName" = "engineering" ]; then
+        cd $PROJECTS_HOME/"Engineering" && code .;
+    fi
+} 
