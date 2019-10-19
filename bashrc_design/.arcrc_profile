@@ -1,3 +1,57 @@
+#!/bin/bash
+
+
+# Environment variables
+export PROJECTS_HOME=$HOME/Projects
+
+
+# Github aliases
 alias g="git status";
-alias ga="git add"
-alias gc="git commit -m"
+alias ga="git add";
+alias gc="git commit -m";
+alias gpl="git pull";
+alias gph="git push";
+alias gbc="git checkout";
+alias gbcn="git checkout -b";
+alias gb="git branch";
+
+
+# Function aliases
+alias trello=trello_open
+alias proj=project_open
+
+
+# Functions
+function trello_open () {
+    
+    projectName="$1"
+
+    if [ "$projectName" = "compilers" ] || [ "$projectName" = "cmp" ]; then
+        open https://trello.com/b/gFL5QAQm/compilers
+    fi
+    if [ "$projectName" = "eng" ] || [ "$projectName" = "engineering" ]; then
+        open https://trello.com/b/MPTBFQzo/engineering
+    fi
+}
+
+
+function project_open () {
+    
+    projectName="$1"
+    if [ "$projectName" = "compilers" ] || [ "$projectName" = "cmp" ]; then
+        cd $PROJECTS_HOME/"compilers"
+        if []
+    fi
+    if [ "$projectName" = "eng" ] || [ "$projectName" = "engineering" ]; then
+        cd $PROJECTS_HOME/"Engineering"
+    fi
+} 
+
+
+function is_github_repo () {
+    if [ -d .git ]; then
+        echo .git;
+    else
+        git rev-parse --git-dir 2> /dev/null;
+    fi;
+}
