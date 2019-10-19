@@ -40,7 +40,6 @@ function project_open () {
     projectName="$1"
     if [ "$projectName" = "compilers" ] || [ "$projectName" = "cmp" ]; then
         cd $PROJECTS_HOME/"compilers"
-        if []
     fi
     if [ "$projectName" = "eng" ] || [ "$projectName" = "engineering" ]; then
         cd $PROJECTS_HOME/"Engineering"
