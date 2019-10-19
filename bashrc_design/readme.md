@@ -1,4 +1,7 @@
-# arcRC 
+# <div class="monospace">arcRC </div>
+<div class="monospace">
+<link rel="stylesheet" href="styles.css">
+
 Trello: [Bashrc Design Project](https://trello.com/c/qC57Uphv/1-bashrc-project)
 
 **arcRC**  is a collection of useful aliases for local development. 
@@ -7,6 +10,7 @@ Trello: [Bashrc Design Project](https://trello.com/c/qC57Uphv/1-bashrc-project)
 ### Features 
 
 Includes aliases for: 
+<div class="monospace">
 
 > - Github
 > - Docker
@@ -14,5 +18,7 @@ Includes aliases for:
 > - Dev project management
 > - trello integration
 
+</div>
 
-®cepstrumlabs<sub>0.0.1</sub>
+®<span class='andale'> cepstrumlabs<sub>v0.0.1</sub> </span>
+</div>
