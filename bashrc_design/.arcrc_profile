@@ -1,18 +1,17 @@
 #!/bin/bash
 
-echo "Activating ArcRC ..."
+# PROJECTS
 
-echo \
-"   _______ ________ _________               
-    ___    |___  __ \__  ____/_______________
-    __  /| |__  /_/ /_  /     __  ___/_  ___/
-    _  ___ |_  _, _/ / /___   _  /    / /__  
-    /_/  |_|/_/ |_|  \____/   /_/     \___/             @CEPSTRUMLABS
-"                                         
+export PROJECTS_ROOT="$HOME/Projects"
+export ENGINEERING="$PROJECTS_ROOT/Engineering"
+export COMPILERS="$PROJECTS_ROOT/compilers"
+export SETTINGS="$ENGINERING/bashrc_design"
 
+export TRELLO_VARS=$SETTINGS/.trello_vars
 
 # Environment variables
-export PROJECTS_ROOT=$HOME/Projects
+source $TRELLO_VARS
+
 
 # Shortcuts
 
@@ -40,13 +39,14 @@ alias ....="cd ..;cd ..;cd .."
 
 # Project navigation
 alias exploit="cd $PROJECTS_ROOT/exploit"
-alias engineering="cd $PROJECTS_ROOT/Engineering"
-alias eng="cd $PROJECTS_ROOT/Engineering"
-alias compilers="cd $PROJECTS_ROOT/compilers"
+alias engineering="cd $ENGINEERING"
+alias eng=engineering
+alias compilers="cd $COMPILERS"
 
 # Github aliases
 alias g="git status"
-alias ga="git add"
+alias ga="git add -u"
+alias gaa="git add ."
 alias gc="git commit -m"
 alias gpl="git pull"
 alias gph="git push"
@@ -71,6 +71,7 @@ alias mkgz='tar -cvzf'
 alias untar='tar -xvf'
 alias unbz2='tar -xvjf'
 alias ungz='tar -xvzf'
+alias cpu="grep 'cpu ' /proc/stat | awk '{usage=(\$2+\$4)*100/(\$2+\$4+\$5)} END {print usage}' | awk '{printf(\"%.1f\n\", \$1)}'"
 
 
 
@@ -94,12 +95,17 @@ function is_github_repo () {
 function trello_open () {
     
     projectName="$1"
+    
+    if ! [ "$projectName" ];then
+        o $BOARDS_TRELLO
+    fi
 
     if [ "$projectName" = "compilers" ] || [ "$projectName" = "cmp" ]; then
-        o https://trello.com/b/gFL5QAQm/compilers
+        o $COMPILERS_TRELLO
     fi
+
     if [ "$projectName" = "eng" ] || [ "$projectName" = "engineering" ]; then
-        o https://trello.com/b/MPTBFQzo/engineering
+        o  $ENGINEERING_TRELLO
     fi
 }
 
@@ -136,9 +142,8 @@ function project_open_with_code () {
 } 
 
 
-function reload() {
-    source "$HOME"/.bash_profile;
-    clear;
+function reload() {                                         
+    . $HOME/.bash_profile;
 }
 
 # Goes up a specified number of directories (i.e 4)
@@ -169,3 +174,15 @@ function whatsmyip ()
     # External IP Lookup
     echo -n "External IP: " ; wget http://smart-ip.net/myip -O - -q
 }
+
+
+
+
+echo "   _______ ________ _________               
+    ___    |___  __ \__  ____/_______________
+    __  /| |__  /_/ /_  /     __  ___/_  ___/
+    _  ___ |_  _, _/ / /___   _  /    / /__  
+    /_/  |_|/_/ |_|  \____/   /_/     \___/             @CEPSTRUMLABS
+"
+PS1+=$LOGO
+# export PS1=$PS1
