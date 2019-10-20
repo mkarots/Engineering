@@ -101,12 +101,17 @@ alias projc="project_open_with_code"
 
 
 # Helper Functions
+branchname () {
+    return "$(git symbolic-ref --short HEAD)"
+}
+
+reponame() {
+    return "$()"
+}
 
 cd() {      
     builtin cd "$1"
     if is_github_repo;then
-        export branchname="$(git symbolic-ref --short HEAD)";
-        export reponame="$(basename $(git rev-parse --show-toplevel))";
         g;
     else
        export branchname=""
@@ -116,7 +121,8 @@ cd() {
 }
 
 function git_push() {
-    branchName=$(git symbolic-ref --short HEAD)
+
+    branchName=branchname
     retcode=$?
     non_push_suffix="_local"
     # Only push if branch_name was found (my be empty if in detached head state)
@@ -134,9 +140,9 @@ function git_push() {
 function git_commit_and_push() {
     re="^add-(.){5,50}"
     if [[ "$1" =~  $re ]]; then
+        branchName=branchname
         ga ;gc $1;git_push;
-        chrome https://github.com/michael-karotsieris/$reponame/compare/$branchname?expand=1
-        
+        chrome https://github.com/michael-karotsieris/$reponame/compare/$branchName?expand=1 
     else
         echo "Bad commit message: " $1
     fi
