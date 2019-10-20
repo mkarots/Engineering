@@ -120,7 +120,7 @@ function git_push() {
 
 
 function git_commit_and_push() {
-    re="^add-[a-zA-Z]"
+    re="^add-(.){5,50}"
     if [[ "$1" =~  $re ]]; then
         ga ;gc $1;git_push;
         o "https://github.com/michael-karotsieris/$reponame/compare/$branchname?expand=1"
