@@ -187,4 +187,3 @@ echo "   _______ ________ _________
 " 
 PS1+=$LOGO
 tput sgr0
-# export PS1=$PS1
