@@ -2,6 +2,7 @@
 
 # PROJECTS
 
+# This is a new line
 PROJECTS_ROOT="$HOME/Projects"
 ENGINEERING="$PROJECTS_ROOT/Engineering"
 COMPILERS="$PROJECTS_ROOT/compilers"
