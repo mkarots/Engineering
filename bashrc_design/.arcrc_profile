@@ -1,5 +1,16 @@
 #!/bin/bash
 
+echo "Activating ArcRC ..."
+
+echo \
+"   _______ ________ _________               
+    ___    |___  __ \__  ____/_______________
+    __  /| |__  /_/ /_  /     __  ___/_  ___/
+    _  ___ |_  _, _/ / /___   _  /    / /__  
+    /_/  |_|/_/ |_|  \____/   /_/     \___/             @CEPSTRUMLABS
+"                                         
+
+
 # Environment variables
 export PROJECTS_ROOT=$HOME/Projects
 
@@ -11,7 +22,7 @@ alias q="exit"
 alias cs="clear;ls"
 alias p="cat"
 alias pd="pwd"
-alias lsa = "ls -la"
+alias lsa="ls -la"
 alias t="time"
 alias k="kill"
 alias o="open"
@@ -26,12 +37,12 @@ alias gdrive="cd ~/Google\ Drive"
 alias ..="cd .."
 alias ...="cd ..;cd .."
 alias ....="cd ..;cd ..;cd .."
-alias compilers="cd $PROJECTS_ROOT/Projects/compilers"
-alias exploit="cd $PROJECTS_ROOT/Projects/exploit"
-alias engineering="cd $PROJECTS_ROOT/Projects/Engineering"
-alias eng="cd $PROJECTS_ROOT/Projects/Engineering"
-alias compilers="cd $PROJECTS_ROOT/Projects/compilers"
 
+# Project navigation
+alias exploit="cd $PROJECTS_ROOT/exploit"
+alias engineering="cd $PROJECTS_ROOT/Engineering"
+alias eng="cd $PROJECTS_ROOT/Engineering"
+alias compilers="cd $PROJECTS_ROOT/compilers"
 
 # Github aliases
 alias g="git status"
@@ -48,8 +59,21 @@ alias clone="git clone"
 
 
 # Global function aliases
-
 alias ping="ping -c 10"
+alias bd='cd "$OLDPWD"'
+alias diskspace="du -S | sort -n -r |more"
+alias treed='tree -CAFd'
+alias tree='tree -CAhF --dirsfirst'
+alias mountedinfo='df -hT'
+alias mktar='tar -cvf'
+alias mkbz2='tar -cvjf'
+alias mkgz='tar -cvzf'
+alias untar='tar -xvf'
+alias unbz2='tar -xvjf'
+alias ungz='tar -xvzf'
+
+
+
 # Local Function aliases
 alias trello="trello_open"
 alias proj="project_open"
@@ -117,3 +141,31 @@ function reload() {
     clear;
 }
 
+# Goes up a specified number of directories (i.e 4)
+up ()
+{
+local d=""
+	limit=$1
+for ((i=1 ; i <= limit ; i++))
+do
+			d=$d/..
+done
+	d=$(echo $d | sed 's/^\///')
+if [ -z "$d" ]; then
+		d=..
+fi
+cd $d
+}
+
+
+# IP address lookup
+alias whatismyip="whatsmyip"
+function whatsmyip ()
+{
+    # Dumps a list of all IP addresses for every device
+    /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }' |awk -F: '{ print $1 ": " $3 }';
+    # Internal IP Lookup
+    echo -n "Internal IP: " ; /sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}'
+    # External IP Lookup
+    echo -n "External IP: " ; wget http://smart-ip.net/myip -O - -q
+}
