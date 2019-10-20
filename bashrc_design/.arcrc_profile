@@ -2,19 +2,21 @@
 
 # PROJECTS
 
-export PROJECTS_ROOT="$HOME/Projects"
-export ENGINEERING="$PROJECTS_ROOT/Engineering"
-export COMPILERS="$PROJECTS_ROOT/compilers"
-export SETTINGS="$ENGINEERING/bashrc_design"
-export NOTES="$SETTINGS/notes"
-export TRELLO_VARS="$SETTINGS/.trello_vars"
+# This is a new line
+PROJECTS_ROOT="$HOME/Projects"
+ENGINEERING="$PROJECTS_ROOT/Engineering"
+COMPILERS="$PROJECTS_ROOT/compilers"
+SETTINGS="$ENGINEERING/bashrc_design"
+NOTES="$SETTINGS/notes"
+BASH_PROFILE_PATH="$HOME/.bash_profile"
+TRELLO_VARS_FILE="$SETTINGS/.trello_vars"
 
 #Documentation
 
 alias iterm2="$NOTES/iterm2.md"
 
 # Environment variables
-source $TRELLO_VARS
+source "$TRELLO_VARS_FILE"
 
 # Shortcuts
 
@@ -33,12 +35,11 @@ alias t="time"
 alias k="kill"
 alias o="open"
 alias wget="wget -c"  # Continue the download in case of a problem
-# alias ps="ps aux"
 alias psg="ps | grep -v grep | grep -i -e VSZ -e"
 alias null="/dev/null"
 alias bashrc="vim $HOME/.bash_profile"
 alias term_size='echo "Rows=$(tput lines) Cols=$(tput cols)"'
-alias src="clear;source $HOME/.bash_profile"
+alias src="clear;source $BASH_PROFILE_PATH"
 
 
 # Navigation
@@ -101,6 +102,18 @@ alias projc="project_open_with_code"
 
 # Helper Functions
 
+cd() {      
+    builtin cd "$1"
+    if is_github_repo;then
+        export branchname="$(git symbolic-ref --short HEAD)";
+        export reponame="$(basename $(git rev-parse --show-toplevel))";
+        g;
+    else
+       export branchname=""
+       export reponame=""
+    fi
+
+}
 
 function git_push() {
     branchName=$(git symbolic-ref --short HEAD)
@@ -118,12 +131,12 @@ function git_push() {
     fi
 }
 
-
 function git_commit_and_push() {
     re="^add-(.){5,50}"
     if [[ "$1" =~  $re ]]; then
         ga ;gc $1;git_push;
-        o "https://github.com/michael-karotsieris/$reponame/compare/$branchname?expand=1"
+        chrome https://github.com/michael-karotsieris/$reponame/compare/$branchname?expand=1
+        
     else
         echo "Bad commit message: " $1
     fi
@@ -131,8 +144,9 @@ function git_commit_and_push() {
 
 alias gcp="git_commit_and_push"
 
+
 function is_github_repo () {
-    if $(git rev-parse --is-inside-work-tree 2&1>/dev/null); then
+    if $(git rev-parse --is-inside-work-tree 2>&1); then
         return 0
     else
         return 1
