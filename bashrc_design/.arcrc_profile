@@ -106,18 +106,14 @@ branchname () {
 }
 
 reponame() {
-    return "$()"
+    return "$(basename $(git rev-parse --show-toplevel))"
 }
 
 cd() {      
     builtin cd "$1"
     if is_github_repo;then
         g;
-    else
-       export branchname=""
-       export reponame=""
     fi
-
 }
 
 function git_push() {
@@ -141,8 +137,9 @@ function git_commit_and_push() {
     re="^add-(.){5,50}"
     if [[ "$1" =~  $re ]]; then
         branchName=branchname
+        repoName=reponame
         ga ;gc $1;git_push;
-        chrome https://github.com/michael-karotsieris/$reponame/compare/$branchName?expand=1 
+        chrome https://github.com/michael-karotsieris/$repoName/compare/$branchName?expand=1 
     else
         echo "Bad commit message: " $1
     fi
