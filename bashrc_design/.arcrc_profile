@@ -26,7 +26,7 @@ alias t="time"
 alias k="kill"
 alias o="open"
 alias null="/dev/null"
-alias bashrc="vim ~/.bashrc"
+alias bashrc="vim $HOME/.bash_profile"
 
 # Navigation
 alias home="cd ~"
