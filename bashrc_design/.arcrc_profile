@@ -1,28 +1,59 @@
 #!/bin/bash
 
-
 # Environment variables
-export PROJECTS_HOME=$HOME/Projects
+export PROJECTS_ROOT=$HOME/Projects
+
+# Shortcuts
+
+alias h="history"
+alias c="clear"
+alias q="exit"
+alias cs="clear;ls"
+alias p="cat"
+alias pd="pwd"
+alias lsa = "ls -la"
+alias t="time"
+alias k="kill"
+alias o="open"
+alias null="/dev/null"
+alias bashrc="vim ~/.bashrc"
+
+# Navigation
+alias home="cd ~"
+alias root="cd /"
+alias dtop="cd ~/Desktop"
+alias gdrive="cd ~/Google\ Drive"
+alias ..="cd .."
+alias ...="cd ..;cd .."
+alias ....="cd ..;cd ..;cd .."
+alias compilers="cd $PROJECTS_ROOT/Projects/compilers"
+alias exploit="cd $PROJECTS_ROOT/Projects/exploit"
+alias engineering="cd $PROJECTS_ROOT/Projects/Engineering"
+alias eng="cd $PROJECTS_ROOT/Projects/Engineering"
+alias compilers="cd $PROJECTS_ROOT/Projects/compilers"
 
 
 # Github aliases
-alias g="git status";
-alias ga="git add";
-alias gc="git commit -m";
-alias gpl="git pull";
-alias gph="git push";
-alias gbc="git checkout";
-alias gbcn="git checkout -b";
-alias gb="git branch";
-alias gl="git log";
-alias gd="git diff";
+alias g="git status"
+alias ga="git add"
+alias gc="git commit -m"
+alias gpl="git pull"
+alias gph="git push"
+alias gbc="git checkout"
+alias gbcn="git checkout -b"
+alias gb="git branch"
+alias gl="git log"
+alias gd="git diff"
+alias clone="git clone"
 
 
+# Global function aliases
 
+alias ping="ping -c 10"
 # Local Function aliases
-alias trello="trello_open";
-alias proj="project_open";
-alias projc="project_open_with_code";
+alias trello="trello_open"
+alias proj="project_open"
+alias projc="project_open_with_code"
 
 
 # Helper Functions
@@ -41,10 +72,10 @@ function trello_open () {
     projectName="$1"
 
     if [ "$projectName" = "compilers" ] || [ "$projectName" = "cmp" ]; then
-        open https://trello.com/b/gFL5QAQm/compilers
+        o https://trello.com/b/gFL5QAQm/compilers
     fi
     if [ "$projectName" = "eng" ] || [ "$projectName" = "engineering" ]; then
-        open https://trello.com/b/MPTBFQzo/engineering
+        o https://trello.com/b/MPTBFQzo/engineering
     fi
 }
 
@@ -52,7 +83,7 @@ function trello_open () {
 function project_open () {  
     projectName="$1"
     if [ "$projectName" = "compilers" ] || [ "$projectName" = "cmp" ]; then
-        cd $PROJECTS_HOME/"compilers";
+        cd $PROJECTS_ROOT/"compilers";
         if is_github_repo;then
             echo "Found existing github repo..."
             git log;
@@ -60,7 +91,7 @@ function project_open () {
 
     fi
     if [ "$projectName" = "eng" ] || [ "$projectName" = "engineering" ]; then
-        cd $PROJECTS_HOME/"Engineering"
+        cd $PROJECTS_ROOT/"Engineering"
         if is_github_repo;then    
             echo "here" 
             echo "Found existing github repo..."
@@ -72,11 +103,11 @@ function project_open () {
 function project_open_with_code () {  
     projectName="$1"
     if [ "$projectName" = "compilers" ] || [ "$projectName" = "cmp" ]; then
-        cd $PROJECTS_HOME/"compilers" && code .;
+        cd $PROJECTS_ROOT/"compilers" && code .;
 
     fi
     if [ "$projectName" = "eng" ] || [ "$projectName" = "engineering" ]; then
-        cd $PROJECTS_HOME/"Engineering" && code .;
+        cd $PROJECTS_ROOT/"Engineering" && code .;
     fi
 } 
 
