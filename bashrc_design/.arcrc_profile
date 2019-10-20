@@ -8,7 +8,6 @@ COMPILERS="$PROJECTS_ROOT/compilers"
 SETTINGS="$ENGINEERING/bashrc_design"
 NOTES="$SETTINGS/notes"
 BASH_PROFILE_PATH="$HOME/.bash_profile"
-
 TRELLO_VARS_FILE="$SETTINGS/.trello_vars"
 
 #Documentation
