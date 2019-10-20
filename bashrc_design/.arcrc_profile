@@ -35,7 +35,6 @@ alias t="time"
 alias k="kill"
 alias o="open"
 alias wget="wget -c"  # Continue the download in case of a problem
-# alias ps="ps aux"
 alias psg="ps | grep -v grep | grep -i -e VSZ -e"
 alias null="/dev/null"
 alias bashrc="vim $HOME/.bash_profile"
@@ -76,8 +75,6 @@ alias gl="git log"
 alias gd="git diff"
 alias clone="git clone"
 alias merge="git merge"
-alias branchname="(git symbolic-ref --short HEAD)"
-reponame=""
 
 
 # Global function aliases
@@ -105,6 +102,18 @@ alias projc="project_open_with_code"
 
 # Helper Functions
 
+cd() {      
+    builtin cd "$1"
+    if is_github_repo;then
+        export branchname="$(git symbolic-ref --short HEAD)";
+        export reponame="$(basename $(git rev-parse --show-toplevel))";
+        g;
+    else
+       export branchname=""
+       export reponame=""
+    fi
+
+}
 
 function git_push() {
     branchName=$(git symbolic-ref --short HEAD)
@@ -122,12 +131,11 @@ function git_push() {
     fi
 }
 
-
-set -x 
 function git_commit_and_push() {
     re="^add-[a-zA-Z]"
     if [[ "$1" =~  $re ]]; then
         ga ;gc $1;git_push;
+        o https://github.com/michael-karotsieris/$reponame/pull/new/$branchname
         
     else
         echo "Bad commit message: " $1
@@ -136,21 +144,9 @@ function git_commit_and_push() {
 
 alias gcp="git_commit_and_push"
 
-set +x
-# function split_path () {
-#     path="$1"
-#     read -ra STRING_STREAM <<< "$path"
-#     IFS='/'
-#     for i in "${STRING_STREAM[@]}"; do # access each element of array
-#         ;;
-#     done
-#     echo "$i"
-    
-# }
-
 
 function is_github_repo () {
-    if $(git rev-parse --is-inside-work-tree 2&1>/dev/null); then
+    if $(git rev-parse --is-inside-work-tree 2>&1); then
         return 0
     else
         return 1
@@ -262,4 +258,3 @@ echo "   _______ ________ _________
 PS1+=$LOGO
 tput sgr0
 
-# set +x
