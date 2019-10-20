@@ -6,12 +6,15 @@ export PROJECTS_ROOT="$HOME/Projects"
 export ENGINEERING="$PROJECTS_ROOT/Engineering"
 export COMPILERS="$PROJECTS_ROOT/compilers"
 export SETTINGS="$ENGINEERING/bashrc_design"
-
+export NOTES="$SETTINGS/notes"
 export TRELLO_VARS="$SETTINGS/.trello_vars"
+
+#Documentation
+
+alias iterm2="$NOTES/iterm2.md"
 
 # Environment variables
 source $TRELLO_VARS
-
 
 # Shortcuts
 
@@ -19,26 +22,36 @@ alias h="history"
 alias c="clear"
 alias q="exit"
 alias cs="clear;ls"
+alias chrome="open -a \"Google Chrome\""
+alias gr="grep"
 alias p="cat"
 alias pd="pwd"
 alias lsa="ls -la"
+alias mkdir="mkdir -pv"
+alias ll="ls -lhA"
 alias t="time"
 alias k="kill"
 alias o="open"
+alias wget="wget -c"  # Continue the download in case of a problem
+# alias ps="ps aux"
+alias psg="ps | grep -v grep | grep -i -e VSZ -e"
 alias null="/dev/null"
 alias bashrc="vim $HOME/.bash_profile"
 alias term_size='echo "Rows=$(tput lines) Cols=$(tput cols)"'
+alias src="clear;source $HOME/.bash_profile"
+
 
 # Navigation
-alias home="cd ~"
+alias home="cd $HOME"
 alias root="cd /"
-alias dtop="cd ~/Desktop"
-alias gdrive="cd ~/Google\ Drive"
+alias dtop="cd $HOME/Desktop"
+alias gdrive="cd /Google\ Drive"
 alias ..="cd .."
 alias ...="cd ..;cd .."
 alias ....="cd ..;cd ..;cd .."
 
 # Project navigation
+alias prj="cd $PROJECTS_ROOT"
 alias exploit="cd $PROJECTS_ROOT/exploit"
 alias engineering="cd $ENGINEERING"
 alias eng=engineering
@@ -54,9 +67,13 @@ alias gph="git push"
 alias gbc="git checkout"
 alias gbcn="git checkout -b"
 alias gb="git branch"
+alias gba="gb -av"
+alias gbd="gb -d"
+alias gbrnm="gb -m"
 alias gl="git log"
 alias gd="git diff"
 alias clone="git clone"
+alias merge="git merge"
 
 
 # Global function aliases
@@ -83,6 +100,35 @@ alias projc="project_open_with_code"
 
 
 # Helper Functions
+
+
+function git_push() {
+    branchName=$(git symbolic-ref --short HEAD)
+    retcode=$?
+    non_push_suffix="_local"
+    # Only push if branch_name was found (my be empty if in detached head state)
+    if [ $retcode -eq 0 ] ; then
+            #Only push if branch_name does not end with the non-push suffix
+            if [[ "$branchName" != *$"non_push_suffix" ]] ; then
+                echo 
+                echo *** Pushing current branch $branchName to origin;
+                echo
+                git push origin "$branchName"
+            fi
+    fi
+}
+
+
+function git_commit_and_push() {
+    re="^add-[a-zA-Z]"
+    if [[ "$1" =~  $re ]]; then
+        ga ;gc $1;git_push;
+    else
+        echo "Bad commit message: " $1
+    fi
+}
+
+alias gcp="git_commit_and_push"
 
 function is_github_repo () {
     if $(git rev-parse --is-inside-work-tree 2&1>/dev/null); then
@@ -142,6 +188,15 @@ function project_open_with_code () {
     fi
 } 
 
+function markdown_viewer () {
+    echo "$1"
+    if [ -f "$1" ]; then
+        echo "hiiii"  
+        mdless "$1";
+    fi
+}
+
+alias notes="markdown_viewer"
 
 function reload() {                                         
     . $HOME/.bash_profile;
@@ -173,7 +228,7 @@ function whatsmyip ()
     # Internal IP Lookup
     echo -n "Internal IP: " ; /sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}'
     # External IP Lookup
-    echo -n "External IP: " ; wget http://smart-ip.net/myip -O - -q
+    echo -n "External IP: " ; curl http://smart-ip.net/myip
 }
 
 
