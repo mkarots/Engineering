@@ -101,34 +101,37 @@ alias projc="project_open_with_code"
 
 
 # Helper Functions
-branchname () {
-    $(git symbolic-ref --short HEAD)
+get_branchname () {
+    export BRANCH_NAME=$(git symbolic-ref --short HEAD)
 }
 
-reponame() {
-    $(basename $(git rev-parse --show-toplevel))
+get_reponame() {
+    export REPO_NAME=$(basename $(git rev-parse --show-toplevel))
 }
 
 cd() {      
     builtin cd "$1"
     if is_github_repo;then
         g;
+    else
+        export BRANCH_NAME=""
+        export REPO_NAME=""
     fi
 }
 
 function git_push() {
 
-    branchName=branchname()
+    branchname
     retcode=$?
     non_push_suffix="_local"
     # Only push if branch_name was found (my be empty if in detached head state)
     if [ $retcode -eq 0 ] ; then
             #Only push if branch_name does not end with the non-push suffix
-            if [[ "$branchName" != *$"non_push_suffix" ]] ; then
+            if [[ "$BRANCH_NAME" != *$"non_push_suffix" ]] ; then
                 echo 
-                echo *** Pushing current branch $branchName to origin;
+                echo *** Pushing current branch $BRANCH_NAME to origin;
                 echo
-                git push origin "$branchName"
+                git push origin "$BRANCH_NAME"
             fi
     fi
 }
@@ -136,10 +139,10 @@ function git_push() {
 function git_commit_and_push() {
     re="^add-(.){5,50}"
     if [[ "$1" =~  $re ]]; then
-        branchName=branchname
-        repoName=reponame
+        get_branchname;
+        get_reponame;
         ga ;gc $1;git_push;
-        chrome https://github.com/michael-karotsieris/$repoName/compare/$branchName?expand=1 
+        chrome https://github.com/michael-karotsieris/$REPO_NAME/compare/$BRANCH_NAME?expand=1 
     else
         echo "Bad commit message: " $1
     fi
