@@ -5,9 +5,9 @@
 export PROJECTS_ROOT="$HOME/Projects"
 export ENGINEERING="$PROJECTS_ROOT/Engineering"
 export COMPILERS="$PROJECTS_ROOT/compilers"
-export SETTINGS="$ENGINERING/bashrc_design"
+export SETTINGS="$ENGINEERING/bashrc_design"
 
-export TRELLO_VARS=$SETTINGS/.trello_vars
+export TRELLO_VARS="$SETTINGS/.trello_vars"
 
 # Environment variables
 source $TRELLO_VARS
@@ -27,6 +27,7 @@ alias k="kill"
 alias o="open"
 alias null="/dev/null"
 alias bashrc="vim $HOME/.bash_profile"
+alias term_size='echo "Rows=$(tput lines) Cols=$(tput cols)"'
 
 # Navigation
 alias home="cd ~"
@@ -176,13 +177,14 @@ function whatsmyip ()
 }
 
 
-
-
+tput bold
 echo "   _______ ________ _________               
     ___    |___  __ \__  ____/_______________
     __  /| |__  /_/ /_  /     __  ___/_  ___/
     _  ___ |_  _, _/ / /___   _  /    / /__  
     /_/  |_|/_/ |_|  \____/   /_/     \___/             @CEPSTRUMLABS
-"
+
+" 
 PS1+=$LOGO
+tput sgr0
 # export PS1=$PS1
