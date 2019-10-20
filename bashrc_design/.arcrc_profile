@@ -123,6 +123,7 @@ function git_commit_and_push() {
     re="^add-[a-zA-Z]"
     if [[ "$1" =~  $re ]]; then
         ga ;gc $1;git_push;
+        o "https://github.com/michael-karotsieris/$reponame/compare/$branchname?expand=1"
     else
         echo "Bad commit message: " $1
     fi
