@@ -102,11 +102,11 @@ alias projc="project_open_with_code"
 
 # Helper Functions
 branchname () {
-    "$(git symbolic-ref --short HEAD)"
+    $(git symbolic-ref --short HEAD)
 }
 
 reponame() {
-    "$(basename $(git rev-parse --show-toplevel))"
+    $(basename $(git rev-parse --show-toplevel))
 }
 
 cd() {      
