@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # PROJECTS
 
@@ -17,7 +17,7 @@ alias iterm2="$NOTES/iterm2.md"
 
 # Environment variables
 source "$TRELLO_VARS_FILE"
-
+export PS1="⚡":$PS1
 # Shortcuts
 
 alias h="history"
