@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # PROJECTS
 
@@ -165,24 +165,28 @@ function git_push() {
 
 
 function git_commit_and_push() {
-    re="(add|update|remove|fix)-(.){3,50}"
-    if [[ "$1" =~  $re ]]; then
-        get_repo_root
-        get_branchname;
-        get_reponame;
-        ga ;gc $1;git_push;
-        if pr_exists;then
-            chrome https://github.com/michael-karotsieris/$REPO_NAME/pull/$BRANCH_NAME
+    if is_github_repo;then
+        re="(.)*"
+        if [[ "$1" =~  $re ]]; then
+            get_repo_root
+            get_branchname;
+            get_reponame;
+            ga ;gc $1;git_push;
+            if pr_exists;then
+                chrome https://github.com/michael-karotsieris/$REPO_NAME/pull/$BRANCH_NAME
+            else
+                chrome https://github.com/michael-karotsieris/$REPO_NAME/compare/$BRANCH_NAME?expand=1 
+            fi
         else
-            chrome https://github.com/michael-karotsieris/$REPO_NAME/compare/$BRANCH_NAME?expand=1 
+            echo "Bad commit message: " $1
         fi
     else
-        echo "Bad commit message: " $1
+        exit 1
     fi
 }
 
 alias gcp="git_commit_and_push"
-
+alias gcep="gcp ."
 
 function is_github_repo () {
     if $(git rev-parse --is-inside-work-tree 2>&1); then
