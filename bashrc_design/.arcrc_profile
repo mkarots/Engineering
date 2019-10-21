@@ -111,14 +111,34 @@ get_reponame() {
     return $?
 }
 
+get_repo_root() {
+    export REPO_ROOT=$(git rev-parse --show-toplevel)/.git
+}
+
 cd() {      
     builtin cd "$1"
     if is_github_repo;then
+        get_repo_root
+        get_reponame
+        get_branchname
         g;
     else
         export BRANCH_NAME=""
         export REPO_NAME=""
     fi
+}
+
+pr_exists() {
+    if is_github_repo;then
+        get_repo_root
+        get_reponame
+        get_branchname
+        expectedPrName="$REPO_ROOT/refs/remotes/origin/$BRANCH_NAME"
+        if [ -f "$expectedPrName" ];then
+            return 0
+        fi
+    fi
+    return 1
 }
 
 function git_push() {
@@ -144,7 +164,11 @@ function git_commit_and_push() {
         get_branchname;
         get_reponame;
         ga ;gc $1;git_push;
-        chrome https://github.com/michael-karotsieris/$REPO_NAME/compare/$BRANCH_NAME?expand=1 
+        if pr_exists;then
+            chrome https://github.com/michael-karotsieris/$REPO_NAME/pull/$BRANCH_NAME
+        else:
+            chrome https://github.com/michael-karotsieris/$REPO_NAME/compare/$BRANCH_NAME?expand=1 
+        fi
     else
         echo "Bad commit message: " $1
     fi
@@ -252,6 +276,14 @@ function whatsmyip ()
     echo -n "Internal IP: " ; /sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}'
     # External IP Lookup
     echo -n "External IP: " ; curl http://smart-ip.net/myip
+}
+
+function check_bool() {
+    if $1;then
+        echo "True";
+    else
+        echo "False";
+    fi
 }
 
 alias netscan="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s"

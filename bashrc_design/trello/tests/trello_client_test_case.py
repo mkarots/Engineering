@@ -1,5 +1,6 @@
 import unittest
 
+
 class TrelloClientTestCase(unittest.TestCase):
     pass
 
