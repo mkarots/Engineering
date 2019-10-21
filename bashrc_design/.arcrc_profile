@@ -103,10 +103,12 @@ alias projc="project_open_with_code"
 # Helper Functions
 get_branchname () {
     export BRANCH_NAME=$(git symbolic-ref --short HEAD)
+    return $?
 }
 
 get_reponame() {
     export REPO_NAME=$(basename $(git rev-parse --show-toplevel))
+    return $?
 }
 
 cd() {      
