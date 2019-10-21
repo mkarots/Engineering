@@ -131,7 +131,7 @@ function git_push() {
             #Only push if branch_name does not end with the non-push suffix
             if [[ "$BRANCH_NAME" != *$"non_push_suffix" ]] ; then
                 echo 
-                echo *** Pushing current branch $BRANCH_NAME to origin;
+                echo ">>>"" Pushing current branch $BRANCH_NAME to origin";
                 echo
                 git push origin "$BRANCH_NAME"
             fi
