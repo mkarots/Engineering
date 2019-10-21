@@ -133,9 +133,7 @@ pr_exists() {
         get_repo_root
         get_reponame
         get_branchname
-        echo $BRANCHNAME
         expectedPrName="$REPO_ROOT/refs/remotes/origin/$BRANCH_NAME"
-        echo $expectedPrName
         if [ -f "$expectedPrName" ];then
             return 0
         fi
@@ -162,7 +160,7 @@ function git_push() {
 
 
 function git_commit_and_push() {
-    re="(add|update|remove|fix)-(.){5,50}"
+    re="(add|update|remove|fix)-(.){3,50}"
     if [[ "$1" =~  $re ]]; then
         get_repo_root
         get_branchname;
@@ -242,7 +240,6 @@ function project_open_with_code () {
 function markdown_viewer () {
     echo "$1"
     if [ -f "$1" ]; then
-        echo "hiiii"  
         mdless "$1";
     fi
 }
