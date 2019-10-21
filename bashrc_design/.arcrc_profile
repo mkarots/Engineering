@@ -109,6 +109,8 @@ get_reponame() {
     export REPO_NAME=$(basename $(git rev-parse --show-toplevel))
 }
 
+get_version()
+
 cd() {      
     builtin cd "$1"
     if is_github_repo;then
@@ -137,7 +139,7 @@ function git_push() {
 }
 
 function git_commit_and_push() {
-    re="^add-(.){5,50}"
+    re="^(add|update|remove|fix-(.){5,50})"
     if [[ "$1" =~  $re ]]; then
         get_branchname;
         get_reponame;
