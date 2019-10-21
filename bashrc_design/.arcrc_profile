@@ -189,7 +189,6 @@ function git_commit_and_push() {
 }
 
 alias gcp="git_commit_and_push"
-alias gcep="gcp . 0"  # Push with mepty commit and no websit popup
 
 
 function trello_open () {
