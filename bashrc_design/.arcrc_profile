@@ -162,6 +162,7 @@ function git_push() {
 function git_commit_and_push() {
     re="^(add|update|remove|fix-(.){5,50})"
     if [[ "$1" =~  $re ]]; then
+        get_repo_root
         get_branchname;
         get_reponame;
         ga ;gc $1;git_push;
