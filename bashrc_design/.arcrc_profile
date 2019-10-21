@@ -19,7 +19,12 @@ alias iterm2="$NOTES/iterm2.md"
 source "$TRELLO_VARS_FILE"
 export PS1="⚡":$PS1
 # Shortcuts
+function nonzero_return() {
+	RETVAL=$?
+	[ $RETVAL -ne 0 ] && echo "$RETVAL"
+}
 
+export PS1="\`nonzero_return\` ":$PS1
 alias h="history"
 alias c="clear"
 alias q="exit"
