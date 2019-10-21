@@ -133,7 +133,9 @@ pr_exists() {
         get_repo_root
         get_reponame
         get_branchname
+        echo $BRANCHNAME
         expectedPrName="$REPO_ROOT/refs/remotes/origin/$BRANCH_NAME"
+        echo $expectedPrName
         if [ -f "$expectedPrName" ];then
             return 0
         fi
