@@ -158,6 +158,7 @@ function git_push() {
     fi
 }
 
+
 function git_commit_and_push() {
     re="^(add|update|remove|fix-(.){5,50})"
     if [[ "$1" =~  $re ]]; then
