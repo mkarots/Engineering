@@ -109,8 +109,6 @@ get_reponame() {
     export REPO_NAME=$(basename $(git rev-parse --show-toplevel))
 }
 
-get_version()
-
 cd() {      
     builtin cd "$1"
     if is_github_repo;then
@@ -123,7 +121,7 @@ cd() {
 
 function git_push() {
 
-    branchname
+    get_branchname
     retcode=$?
     non_push_suffix="_local"
     # Only push if branch_name was found (my be empty if in detached head state)
