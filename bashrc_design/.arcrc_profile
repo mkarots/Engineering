@@ -173,7 +173,7 @@ function git_commit_and_push() {
             get_branchname;
             get_reponame;
             ga ;gc $1;git_push;
-        if [ "$shouldOpenWeb" =~ "1" ]; then
+        if [[ "$shouldOpenWeb" =~ "1" ]]; then
                 if pr_exists;then
                     chrome https://github.com/michael-karotsieris/$REPO_NAME/pull/$BRANCH_NAME
                 else
