@@ -17,14 +17,8 @@ alias iterm2="$NOTES/iterm2.md"
 
 # Environment variables
 source "$TRELLO_VARS_FILE"
-export PS1="⚡":$PS1
 # Shortcuts
-function nonzero_return() {
-	RETVAL=$?
-	[ $RETVAL -ne 0 ] && echo "$RETVAL"
-}
 
-export PS1="\`nonzero_return\` ":$PS1
 alias h="history"
 alias c="clear"
 alias q="exit"
@@ -85,10 +79,8 @@ alias merge="git merge"
 # Global function aliases
 alias ping="ping -c 10"
 alias bd='cd "$OLDPWD"'
-alias diskspace="du -S | sort -n -r |more"
 alias treed='tree -CAFd'
 alias tree='tree -CAhF --dirsfirst'
-alias mountedinfo='df -hT'
 alias mktar='tar -cvf'
 alias mkbz2='tar -cvjf'
 alias mkgz='tar -cvzf'
@@ -156,7 +148,7 @@ function git_push() {
             #Only push if branch_name does not end with the non-push suffix
             if [[ "$BRANCH_NAME" != *$"non_push_suffix" ]] ; then
                 echo 
-                echo ">>>"" Pushing current branch $BRANCH_NAME to origin";
+                echo 🚀🚀🚀 Pushing $BRANCH_NAME to origin;
                 echo
                 git push origin "$BRANCH_NAME"
             fi
@@ -307,4 +299,3 @@ echo "   _______ ________ _________
 " 
 PS1+=$LOGO
 tput sgr0
-
