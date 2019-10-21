@@ -147,7 +147,6 @@ pr_exists() {
 }
 
 function git_push() {
-
     get_branchname
     retcode=$?
     non_push_suffix="_local"

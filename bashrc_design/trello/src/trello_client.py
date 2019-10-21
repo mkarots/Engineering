@@ -1,4 +1,5 @@
 import uuid
+import os
 
 
 class TrelloClientException(Exception):
@@ -11,9 +12,10 @@ class InvalidOperationException(TrelloClientException):
 class NotAllowedException(TrelloClientException):
     pass
 
-
-
 class TrelloClientInterface:
+    
+    def __init__(self):
+        self.apiKey = os.environ.get("TRELLO_API_KEY")
 
     def get_boards(self):
         raise NotImplementedError("This is the interface of the client")
