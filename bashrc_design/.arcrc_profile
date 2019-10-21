@@ -165,7 +165,7 @@ function git_push() {
 
 
 function git_commit_and_push() {
-    shouldOpenWeb=$2
+    shouldOpenWeb="$2"
     if is_github_repo;then
         re="(.)*"
         if [[ "$1" =~  $re ]]; then
