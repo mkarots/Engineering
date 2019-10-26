@@ -29,3 +29,9 @@ To run script that must start with startup and run all the time raspberry pi is 
 Actually, .bashrc won't work to start something on boot. You might try running stuff on /etc/rc.local, that will print output to what you see during boot time. But in order to work "right" your script has to either finish or it has to go into the background. If it hangs forever without letting execution continue, boot sequence won't finish.
 
 Addendum: Real question was related to user login time, not boot time. The answer is to use ~/.profile.
+
+
+
+### Upgrading from 3.2 bash to 5.0.0 bash on MacOS 
+
+[https://itnext.io/upgrading-bash-on-macos-7138bd1066ba]
