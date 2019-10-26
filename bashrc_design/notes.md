@@ -32,6 +32,6 @@ Addendum: Real question was related to user login time, not boot time. The answe
 
 
 
-### Upgrading from 3.2 bash to 5.0.0 bash on MacOS 
+### Upgrading from 3.2 bash to 5 bash on MacOS 
 
 [https://itnext.io/upgrading-bash-on-macos-7138bd1066ba]
