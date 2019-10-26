@@ -2,6 +2,6 @@
 __pycache__
 *.pyc
 .env
-
+local_*
 # Environment variables
 .trello_vars

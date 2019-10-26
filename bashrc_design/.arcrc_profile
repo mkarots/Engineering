@@ -7,6 +7,7 @@ PROJECTS_ROOT="$HOME/Projects"
 ENGINEERING="$PROJECTS_ROOT/Engineering"
 COMPILERS="$PROJECTS_ROOT/compilers"
 SETTINGS="$ENGINEERING/bashrc_design"
+AUTOCOMPLETION_SETTINGS="$SETTINGS/autocompletion_scripts"
 NOTES="$SETTINGS/notes"
 BASH_PROFILE_PATH="$HOME/.bash_profile"
 TRELLO_VARS_FILE="$SETTINGS/.trello_vars"
@@ -15,10 +16,8 @@ GITHUB_HOME=https://github.com/$GITHUB_USERNAME
 
 #Documentation
 
-alias iterm2="$NOTES/iterm2.md"
-
 # Environment variables
-source "$TRELLO_VARS_FILE"
+source $TRELLO_VARS_FILE
 # Shortcuts
 
 alias h="history"
@@ -48,9 +47,9 @@ alias home="cd $HOME"
 alias root="cd /"
 alias dtop="cd $HOME/Desktop"
 alias gdrive="cd /Google\ Drive"
-alias ..="cd .."
-alias ...="cd ..;cd .."
-alias ....="cd ..;cd ..;cd .."
+# alias ..="cd .."
+# alias ...="cd ..;cd .."
+# alias ....="cd ..;cd ..;cd .."
 
 # Project navigation
 alias prj="cd $PROJECTS_ROOT"
@@ -100,30 +99,31 @@ alias projc="project_open_with_code"
 
 
 # Helper Functions
-get_branchname () {
-    export BRANCH_NAME=$(git symbolic-ref --short HEAD)
-    return $?
-}
-
-get_reponame() {
-    export REPO_NAME=$(basename $(git rev-parse --show-toplevel))
-    return $?
-}
-
-get_repo_root() {
-    export REPO_ROOT=$(git rev-parse --show-toplevel)/.git
-}
 
 function is_github_repo () {
-    if $(git rev-parse --is-inside-work-tree 2>&1); then
+    if $(git rev-parse --is-inside-work-tree 2>/dev/null ) ; then
         return 0
     else
         return 1
     fi
 }
 
-cd() {      
-    builtin cd "$1"
+get_branchname () {
+    export BRANCH_NAME=$(git symbolic-ref --short HEAD)
+    return $?
+}
+
+get_reponame () {
+    export REPO_NAME=$(basename $(git rev-parse --show-toplevel))
+    return $?
+}
+
+get_repo_root () {
+    export REPO_ROOT=$(git rev-parse --show-toplevel)/.git
+}
+
+cd () {      
+    builtin cd $1
     if is_github_repo;then
         get_repo_root
         get_reponame
@@ -148,7 +148,7 @@ pr_exists() {
     return 1
 }
 
-function git_push() {
+function git_push () {
     get_branchname
     retcode=$?
     non_push_suffix="_local"
@@ -165,7 +165,7 @@ function git_push() {
 }
 
 
-function git_commit_and_push() {
+function git_commit_and_push () {
     shouldOpenWeb="$2"
     if is_github_repo;then
         re="(.)*"
@@ -300,13 +300,4 @@ function check_bool() {
 }
 
 alias netscan="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s"
-tput bold
-echo "   _______ ________ _________               
-    ___    |___  __ \__  ____/_______________
-    __  /| |__  /_/ /_  /     __  ___/_  ___/
-    _  ___ |_  _, _/ / /___   _  /    / /__  
-    /_/  |_|/_/ |_|  \____/   /_/     \___/             @CEPSTRUMLABS
-
-" 
-PS1+=$LOGO
-tput sgr0
+source $AUTOCOMPLETION_SETTINGS/git-completion.sh
