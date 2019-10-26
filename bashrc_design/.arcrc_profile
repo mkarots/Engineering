@@ -10,14 +10,18 @@ SETTINGS="$ENGINEERING/bashrc_design"
 AUTOCOMPLETION_SETTINGS="$SETTINGS/autocompletion_scripts"
 NOTES="$SETTINGS/notes"
 BASH_PROFILE_PATH="$HOME/.bash_profile"
+ZSH_PROFILE_PATH=""$HOME/.zshrc""
 TRELLO_VARS_FILE="$SETTINGS/.trello_vars"
 GITHUB_USERNAME="michael-karotsieris"
-GITHUB_HOME=https://github.com/$GITHUB_USERNAME
+GITHUB_HOME="https://github.com/$GITHUB_USERNAME"
+BOARDS_TRELLO="https://trello.com/michaelkarotsieris/boards"
+COMPILERS_TRELLO="https://trello.com/b/gFL5QAQm/compilers"
+ENGINEERING_TRELLO="https://trello.com/b/MPTBFQzo/engineering"
 
 #Documentation
 
 # Environment variables
-source $TRELLO_VARS_FILE
+# source $TRELLO_VARS_FILE
 # Shortcuts
 
 alias h="history"
@@ -38,8 +42,9 @@ alias wget="wget -c"  # Continue the download in case of a problem
 alias psg="ps | grep -v grep | grep -i -e VSZ -e"
 alias null="/dev/null"
 alias bashrc="vim $HOME/.bash_profile"
+alias zshrc="vim $HOME/.zshrc"
 alias term_size='echo "Rows=$(tput lines) Cols=$(tput cols)"'
-alias src="clear;source $BASH_PROFILE_PATH"
+alias src="clear;source $ZSH_PROFILE_PATH"
 
 
 # Navigation
