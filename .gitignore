@@ -1,6 +1,7 @@
 # Python
 __pycache__
 *.pyc
+.env
 
 # Environment variables
 .trello_vars
