@@ -1,5 +1,5 @@
 #!/usr/bin/env bash 
-1
+
 # PROJECTS
 
 # This is a new line
@@ -52,9 +52,6 @@ alias home="cd $HOME"
 alias root="cd /"
 alias dtop="cd $HOME/Desktop"
 alias gdrive="cd /Google\ Drive"
-# alias ..="cd .."
-# alias ...="cd ..;cd .."
-# alias ....="cd ..;cd ..;cd .."
 
 # Project navigation
 alias prj="cd $PROJECTS_ROOT"
@@ -101,6 +98,9 @@ alias cpu="grep 'cpu ' /proc/stat | awk '{usage=(\$2+\$4)*100/(\$2+\$4+\$5)} END
 alias trello="trello_open"
 alias proj="project_open"
 alias projc="project_open_with_code"
+alias py=python3
+alias python=python3
+alias pip=pip3
 
 
 # Helper Functions
