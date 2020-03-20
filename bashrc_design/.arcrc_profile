@@ -4,6 +4,7 @@
 
 # This is a new line
 PROJECTS_ROOT="$HOME/Projects"
+ARACHNE="$PROJECTS_ROOT/arachne"
 ENGINEERING="$PROJECTS_ROOT/Engineering"
 COMPILERS="$PROJECTS_ROOT/compilers"
 SETTINGS="$ENGINEERING/bashrc_design"
@@ -59,6 +60,7 @@ alias exploit="cd $PROJECTS_ROOT/exploit"
 alias engineering="cd $ENGINEERING"
 alias eng=engineering
 alias compilers="cd $COMPILERS"
+alias arachne="cd $ARACHNE"
 
 # Github aliases
 alias g="git status"
