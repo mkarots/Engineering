@@ -3,6 +3,7 @@ Display an image with opencv. Press a key to exit the program
 """
 
 import argparse
+
 import cv2
   
 
