@@ -103,6 +103,7 @@ alias projc="project_open_with_code"
 alias py=python3
 alias python=python3
 alias pip=pip3
+alias pipr="pip3 install -r requirements.txt"
 
 
 # Helper Functions
