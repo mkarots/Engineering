@@ -62,6 +62,12 @@ alias eng=engineering
 alias compilers="cd $COMPILERS"
 alias arachne="cd $ARACHNE"
 
+# docker aliases
+
+alias dcdown="docker-compose down"
+alias dcupd="docker-compose up -d"
+alias dreset="dcdown && dcupd"
+
 # Github aliases
 alias g="git status"
 alias ga="git add -u"
@@ -80,6 +86,8 @@ alias gd="git diff"
 alias clone="git clone"
 alias merge="git merge"
 
+# Heroku aliases
+alias gphm="git push heroku master"
 
 # Global function aliases
 alias ping="ping -c 10"
