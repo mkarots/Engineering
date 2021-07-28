@@ -1,12 +1,12 @@
 #!/usr/bin/env bash 
 
-# PROJECTS
-
-# This is a new line
+# PROJECTS and Environment variables
 PROJECTS_ROOT="$HOME/Projects"
 ARACHNE="$PROJECTS_ROOT/arachne"
 ENGINEERING="$PROJECTS_ROOT/Engineering"
 COMPILERS="$PROJECTS_ROOT/compilers"
+VRAXION="$PROJECTS_ROOT/vraxion"
+
 SETTINGS="$ENGINEERING/bashrc_design"
 AUTOCOMPLETION_SETTINGS="$SETTINGS/autocompletion_scripts"
 NOTES="$SETTINGS/notes"
@@ -19,10 +19,8 @@ BOARDS_TRELLO="https://trello.com/michaelkarotsieris/boards"
 COMPILERS_TRELLO="https://trello.com/b/gFL5QAQm/compilers"
 ENGINEERING_TRELLO="https://trello.com/b/MPTBFQzo/engineering"
 
-#Documentation
 
-# Environment variables
-# source $TRELLO_VARS_FILE
+
 # Shortcuts
 
 alias h="history"
@@ -61,6 +59,7 @@ alias engineering="cd $ENGINEERING"
 alias eng=engineering
 alias compilers="cd $COMPILERS"
 alias arachne="cd $ARACHNE"
+alias vraxion="cd $VRAXION"
 
 # docker aliases
 
