@@ -111,6 +111,10 @@ alias py=python3
 alias python=python3
 alias pip=pip3
 alias pipr="pip3 install -r requirements.txt"
+alias pybuildpackage="python setup.py sdist bdist_wheel"
+alias pypublish="twine upload dist/*"
+alias pyvenv="py -mvenv venv"
+alias pyenv="py -mvenv"
 
 
 # Helper Functions
