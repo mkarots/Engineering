@@ -18,7 +18,7 @@ GITHUB_HOME="https://github.com/$GITHUB_USERNAME"
 BOARDS_TRELLO="https://trello.com/michaelkarotsieris/boards"
 COMPILERS_TRELLO="https://trello.com/b/gFL5QAQm/compilers"
 ENGINEERING_TRELLO="https://trello.com/b/MPTBFQzo/engineering"
-
+TWINE_USERNAME="mkarotsieris"
 
 
 # Shortcuts
@@ -117,6 +117,10 @@ alias pypublishpackage="twine upload dist/*"
 alias pyvenv="py -mvenv venv"
 alias pyenv="py -mvenv"
 
+function pypipush() {
+    cd src && pybuildpackage && pycheckpackage && pypublish -u $TWINE_USERNAME && rm -rf ./dist ./build
+    cd ..
+}
 
 # Helper Functions
 
