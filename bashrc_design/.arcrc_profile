@@ -18,7 +18,9 @@ GITHUB_HOME="https://github.com/$GITHUB_USERNAME"
 BOARDS_TRELLO="https://trello.com/michaelkarotsieris/boards"
 COMPILERS_TRELLO="https://trello.com/b/gFL5QAQm/compilers"
 ENGINEERING_TRELLO="https://trello.com/b/MPTBFQzo/engineering"
-TWINE_USERNAME="mkarotsieris"
+
+# Needs to be exported in order to be used by Makefile
+export TWINE_USERNAME="mkarotsieris"
 
 
 # Shortcuts
@@ -63,9 +65,12 @@ alias vraxion="cd $VRAXION"
 
 # docker aliases
 
+alias docker-clean-containers="docker rm $(docker ps -aq)"
+alias docker-clean-images="docker rmi $(docker images -aq)"
 alias dcdown="docker-compose down"
 alias dcupd="docker-compose up -d"
 alias dreset="dcdown && dcupd"
+
 
 # Github aliases
 alias g="git status"
