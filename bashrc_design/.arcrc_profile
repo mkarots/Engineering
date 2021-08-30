@@ -6,6 +6,7 @@ ARACHNE="$PROJECTS_ROOT/arachne"
 ENGINEERING="$PROJECTS_ROOT/Engineering"
 COMPILERS="$PROJECTS_ROOT/compilers"
 VRAXION="$PROJECTS_ROOT/vraxion"
+VRAXIONAPP="$PROJECTS_ROOT/vraxion_app"
 
 SETTINGS="$ENGINEERING/bashrc_design"
 AUTOCOMPLETION_SETTINGS="$SETTINGS/autocompletion_scripts"
@@ -25,76 +26,78 @@ export TWINE_USERNAME="mkarotsieris"
 
 # Shortcuts
 
-alias h="history"
-alias c="clear"
-alias q="exit"
-alias cs="clear;ls"
-alias chrome="open -a \"Google Chrome\""
-alias gr="grep"
-alias p="cat"
-alias pd="pwd"
-alias lsa="ls -la"
-alias mkdir="mkdir -pv"
-alias ll="ls -lhA"
-alias t="time"
-alias k="kill"
-alias o="open"
-alias wget="wget -c"  # Continue the download in case of a problem
-alias psg="ps | grep -v grep | grep -i -e VSZ -e"
-alias null="/dev/null"
-alias bashrc="vim $HOME/.bash_profile"
-alias zshrc="vim $HOME/.zshrc"
+alias h='history'
+alias c='clear'
+alias q='exit'
+alias cs='clear;ls'
+alias chrome='open -a \"Google Chrome\"'
+alias gr='grep'
+alias p='cat'
+alias pd='pwd'
+alias lsa='ls -la'
+alias mkdir='mkdir -pv'
+alias ll='ls -lhA'
+alias t='time'
+alias k='kill'
+alias o='open'
+alias wget='wget -c'  # Continue the download in case of a problem
+alias psg='ps | grep -v grep | grep -i -e VSZ -e'
+alias null='/dev/null'
+alias bashrc='vim $HOME/.bash_profile'
+alias zshrc='vim $HOME/.zshrc'
 alias term_size='echo "Rows=$(tput lines) Cols=$(tput cols)"'
-alias src="clear;source $ZSH_PROFILE_PATH"
+alias src='clear;source $ZSH_PROFILE_PATH'
 
 
 # Navigation
-alias home="cd $HOME"
-alias root="cd /"
-alias dtop="cd $HOME/Desktop"
-alias gdrive="cd /Google\ Drive"
+alias home='cd $HOME'
+alias root='cd /'
+alias dtop='cd $HOME/Desktop'
+alias gdrive='cd /Google\ Drive'
 
 # Project navigation
-alias prj="cd $PROJECTS_ROOT"
-alias exploit="cd $PROJECTS_ROOT/exploit"
-alias engineering="cd $ENGINEERING"
+alias prj='cd $PROJECTS_ROOT'
+alias exploit='cd $PROJECTS_ROOT/exploit'
+alias engineering='cd $ENGINEERING'
 alias eng=engineering
-alias compilers="cd $COMPILERS"
-alias arachne="cd $ARACHNE"
-alias vraxion="cd $VRAXION"
+alias compilers='cd $COMPILERS'
+alias arachne='cd $ARACHNE'
+alias vraxion='cd $VRAXION'
+vraxion='cd $VRAXION'
+vraxionapp='cd VRAXIONAPP'
 
 # docker aliases
 
-alias docker-clean-containers="docker rm $(docker ps -aq)"
-alias docker-clean-images="docker rmi $(docker images -aq)"
-alias dcdown="docker-compose down"
-alias dcupd="docker-compose up -d"
-alias dreset="dcdown && dcupd"
+alias docker-clean-containers='docker rm $(docker ps -aq)'
+alias docker-clean-images='docker rmi $(docker images -aq)'
+alias dcdown='docker-compose down'
+alias dcupd='docker-compose up -d'
+alias dreset='dcdown && dcupd'
 
 
 # Github aliases
-alias g="git status"
-alias ga="git add -u"
-alias gaa="git add ."
-alias gc="git commit -m"
-alias gpl="git pull"
-alias gph="git push"
-alias gbc="git checkout"
-alias gbcn="git checkout -b"
-alias gb="git branch"
-alias gba="gb -av"
-alias gbd="gb -d"
-alias gbrnm="gb -m"
-alias gl="git log"
-alias gd="git diff"
-alias clone="git clone"
-alias merge="git merge"
+alias g='git status'
+alias ga='git add -u'
+alias gaa='git add .'
+alias gc='git commit -m'
+alias gpl='git pull'
+alias gph='git push'
+alias gbc='git checkout'
+alias gbcn='git checkout -b'
+alias gb='git branch'
+alias gba='gb -av'
+alias gbd='gb -d'
+alias gbrnm='gb -m'
+alias gl='git log'
+alias gd='git diff'
+alias clone='git clone'
+alias merge='git merge'
 
 # Heroku aliases
-alias gphm="git push heroku master"
+alias gphm='git push heroku master'
 
 # Global function aliases
-alias ping="ping -c 10"
+alias ping='ping -c 10'
 alias bd='cd "$OLDPWD"'
 alias treed='tree -CAFd'
 alias tree='tree -CAhF --dirsfirst'
@@ -104,23 +107,23 @@ alias mkgz='tar -cvzf'
 alias untar='tar -xvf'
 alias unbz2='tar -xvjf'
 alias ungz='tar -xvzf'
-alias cpu="grep 'cpu ' /proc/stat | awk '{usage=(\$2+\$4)*100/(\$2+\$4+\$5)} END {print usage}' | awk '{printf(\"%.1f\n\", \$1)}'"
+alias cpu='grep "cpu " /proc/stat | awk "{usage=(\$2+\$4)*100/(\$2+\$4+\$5)} END {print usage}" | awk "{printf(\"%.1f\n\", \$1)}"'
 
 
 
 # Local Function aliases
-alias trello="trello_open"
-alias proj="project_open"
-alias projc="project_open_with_code"
+alias trello='trello_open'
+alias proj='project_open'
+alias projc='project_open_with_code'
 alias py=python3
 alias python=python3
 alias pip=pip3
-alias pipr="pip3 install -r requirements.txt"
-alias pybuildpackage="python setup.py sdist bdist_wheel"
-alias pycheckpackage="twine check dist/*"
-alias pypublishpackage="twine upload dist/*"
-alias pyvenv="py -mvenv venv"
-alias pyenv="py -mvenv"
+alias pipr='pip3 install -r requirements.txt'
+alias pybuildpackage='python setup.py sdist bdist_wheel'
+alias pycheckpackage='twine check dist/*'
+alias pypublishpackage='twine upload dist/*'
+alias pyvenv='py -mvenv venv'
+alias pyenv='py -mvenv'
 
 function pypipush() {
     cd src && pybuildpackage && pycheckpackage && pypublish -u $TWINE_USERNAME && rm -rf ./dist ./build
@@ -289,6 +292,10 @@ alias notes="markdown_viewer"
 
 function reload() {                                         
     . $HOME/.bash_profile;
+}
+
+function new_reload() {
+    . $SETTINGS/.arcrc_profile;
 }
 
 # Goes up a specified number of directories (i.e 4)
