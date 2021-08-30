@@ -6,7 +6,7 @@ ARACHNE="$PROJECTS_ROOT/arachne"
 ENGINEERING="$PROJECTS_ROOT/Engineering"
 COMPILERS="$PROJECTS_ROOT/compilers"
 VRAXION="$PROJECTS_ROOT/vraxion"
-VRAXIONAPP="$PROJECTS_ROOT/vraxion_app"
+VRAXIONAPP="$PROJECTS_ROOT/vraxion-app"
 
 SETTINGS="$ENGINEERING/bashrc_design"
 AUTOCOMPLETION_SETTINGS="$SETTINGS/autocompletion_scripts"
@@ -63,8 +63,7 @@ alias eng=engineering
 alias compilers='cd $COMPILERS'
 alias arachne='cd $ARACHNE'
 alias vraxion='cd $VRAXION'
-vraxion='cd $VRAXION'
-vraxionapp='cd VRAXIONAPP'
+alias vraxionapp='cd $VRAXIONAPP'
 
 # docker aliases
 
