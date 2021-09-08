@@ -7,6 +7,8 @@ ENGINEERING="$PROJECTS_ROOT/Engineering"
 COMPILERS="$PROJECTS_ROOT/compilers"
 VRAXION="$PROJECTS_ROOT/vraxion"
 VRAXIONAPP="$PROJECTS_ROOT/vraxion-app"
+DENTAPP="$PROJECTS_ROOT/dentapp"
+DIAGRAMS="$PROJECTS_ROOT/diagrams"
 
 SETTINGS="$ENGINEERING/bashrc_design"
 AUTOCOMPLETION_SETTINGS="$SETTINGS/autocompletion_scripts"
@@ -64,6 +66,8 @@ alias compilers='cd $COMPILERS'
 alias arachne='cd $ARACHNE'
 alias vraxion='cd $VRAXION'
 alias vraxionapp='cd $VRAXIONAPP'
+alias dentapp='cd $DENTAPP'
+alias diagrams='cd $DIAGRAMS'
 
 # docker aliases
 
@@ -124,8 +128,7 @@ alias pyvenv='py -mvenv venv'
 alias pyenv='py -mvenv'
 
 function pypipush() {
-    cd src && pybuildpackage && pycheckpackage && pypublish -u $TWINE_USERNAME && rm -rf ./dist ./build
-    cd ..
+    pybuildpackage && pycheckpackage && pypublishpackage -u $TWINE_USERNAME && rm -rf ./dist ./build
 }
 
 # Helper Functions
