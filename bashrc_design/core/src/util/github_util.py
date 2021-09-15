@@ -1,1 +1,0 @@
-# TODO: Move all bash functions in python
