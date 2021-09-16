@@ -133,6 +133,9 @@ function pypipush() {
 
 # Helper Functions
 
+function py_version () {
+    py -c "from importlib.metadata import version; print(version('${1}'))"
+}
 function is_github_repo () {
     if $(git rev-parse --is-inside-work-tree 2>/dev/null ) ; then
         return 0
