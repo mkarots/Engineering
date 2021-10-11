@@ -231,7 +231,7 @@ function git_commit_and_push () {
 }
 
 alias gcp="git_commit_and_push"
-alias gcepp="git_commit_and_push"
+alias gcepp=gcp
 
 
 function trello_open () {
