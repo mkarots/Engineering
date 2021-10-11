@@ -209,6 +209,7 @@ function git_commit_and_push () {
             get_reponame;
             ga ;gc $1;git_push;
         if [[ "$shouldOpenWeb" = true ]]; then
+                echo $BRANCH_NAME
                 if pr_exists;then
                     open https://github.com/CepstrumLabs/$REPO_NAME/pull/$BRANCH_NAME
                 else
