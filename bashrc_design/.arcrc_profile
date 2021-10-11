@@ -156,6 +156,10 @@ get_repo_root () {
     export REPO_ROOT=$(git rev-parse --show-toplevel)/.git
 }
 
+get_repo_user () {
+    export REPO_USER=$(echo "$(git remote get-url origin)" | cut -d/ -f1 | cut -d: -f2)
+}
+
 cd () {      
     builtin cd $1
     if is_github_repo;then
@@ -206,15 +210,16 @@ function git_commit_and_push () {
         if [[ "$1" =~  $re ]]; then
             get_repo_root
             get_branchname;
+            get_repo_user;
             get_reponame;
             ga ;gc $1;git_push;
         if [[ "$shouldOpenWeb" = true ]]; then
                 if [[ "$BRANCH_NAME" = "master" ]]; then
-                    open https://github.com/CepstrumLabs/$REPO_NAME
+                    open https://github.com/$REPO_USER/$REPO_NAME
                 elif pr_exists;then
-                    open https://github.com/CepstrumLabs/$REPO_NAME/pull/$BRANCH_NAME
+                    open https://github.com/$REPO_USER/$REPO_NAME/pull/$BRANCH_NAME
                 else
-                    open https://github.com/CepstrumLabs/$REPO_NAME/compare/$BRANCH_NAME?expand=1
+                    open https://github.com/$REPO_USER/$REPO_NAME/compare/$BRANCH_NAME?expand=1
                 fi
             fi
         else
