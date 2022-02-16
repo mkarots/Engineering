@@ -1,5 +1,6 @@
 #!/usr/bin/env bash 
 
+
 # PROJECTS and Environment variables
 PROJECTS_ROOT="$HOME/Projects"
 ARACHNE="$PROJECTS_ROOT/arachne"
@@ -124,6 +125,12 @@ alias pycheckpackage='twine check dist/*'
 alias pypublishpackage='twine upload dist/*'
 alias pyvenv='py -mvenv venv'
 alias pyenv='py -mvenv'
+
+# Solana
+
+alias sol-set-devnet='solana config set --url https://api.devnet.solana.com'
+alias sol-get='solana config get'
+alias sol-airdrop='solana airdrop'
 
 function pypipush() {
     pybuildpackage && pycheckpackage && pypublishpackage -u $TWINE_USERNAME && rm -rf ./dist ./build
