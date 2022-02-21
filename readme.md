@@ -14,9 +14,9 @@ Includes aliases for:
 
 > - Github
 > - Docker
-> - Python environment management
-> - Dev project management
-> - trello integration
+> - Python
+> - Navigation through projects
+> - Solana commands
 
 </div>
 
