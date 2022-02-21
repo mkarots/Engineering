@@ -10,6 +10,7 @@ VRAXION="$PROJECTS_ROOT/vraxion"
 VRAXIONAPP="$PROJECTS_ROOT/vraxion-app"
 DENTAPP="$PROJECTS_ROOT/dentapp"
 DIAGRAMS="$PROJECTS_ROOT/diagrams"
+AUTOMALABS_MVP="$PROJECTS_ROOT/solana_related/automalabs/automalabs-mvp"
 
 SETTINGS="$ENGINEERING/bashrc_design"
 AUTOCOMPLETION_SETTINGS="$SETTINGS/autocompletion_scripts"
@@ -67,6 +68,7 @@ alias vraxion='cd $VRAXION'
 alias vraxionapp='cd $VRAXIONAPP'
 alias dentapp='cd $DENTAPP'
 alias diagrams='cd $DIAGRAMS'
+alias automalabs-mvp='cd $AUTOMALABS_MVP'
 
 # docker aliases
 
