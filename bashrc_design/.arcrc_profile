@@ -13,6 +13,7 @@ DENTAPP="$PROJECTS_ROOT/dentapp"
 DIAGRAMS="$PROJECTS_ROOT/diagrams"
 AUTOMALABS_MVP="$PROJECTS_ROOT/solana_related/automalabs/automalabs-mvp"
 AUTOMALABS_LANDING="$PROJECTS_ROOT/solana_related/automalabs/automalabs-landing"
+PROGLOG="$PROJECTS_ROOT/proglog"
 
 SETTINGS="$ENGINEERING/bashrc_design"
 AUTOCOMPLETION_SETTINGS="$SETTINGS/autocompletion_scripts"
@@ -73,6 +74,7 @@ alias dentapp='cd $DENTAPP'
 alias diagrams='cd $DIAGRAMS'
 alias automalabs-mvp='cd $AUTOMALABS_MVP'
 alias automalabs-landing='cd $AUTOMALABS_LANDING'
+alias proglog='cd $PROGLOG'
 
 # docker aliases
 
@@ -88,6 +90,7 @@ alias g='git status'
 alias ga='git add -u'
 alias gaa='git add .'
 alias gc='git commit -m'
+alias gcmain='git checkout main'
 alias gm='git merge'
 alias gmm='git merge master'
 alias gpl='git pull'
@@ -293,7 +296,6 @@ function github_open () {
     chrome $GITHUB_HOME/$REPO_NAME
 }
 
-alias go=github_open
 
 function project_open_with_code () {  
     projectName="$1"
