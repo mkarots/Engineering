@@ -317,11 +317,7 @@ function markdown_viewer () {
 
 alias notes="markdown_viewer"
 
-function reload() {                                         
-    . $HOME/.bash_profile;
-}
-
-function new_reload() {
+function reload() {
     . $SETTINGS/.arcrc_profile;
 }
 
