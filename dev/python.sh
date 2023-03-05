@@ -20,4 +20,3 @@ function pypipush() {
 function py_version () {
     py -c "from importlib.metadata import version; print(version('${1}'))"
 }
-
