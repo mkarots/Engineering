@@ -4,6 +4,5 @@
 local_*
 
 # Environment variables
-.trello_vars
 venv/
 contours/
