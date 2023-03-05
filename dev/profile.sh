@@ -19,13 +19,8 @@ alias c='clear'
 alias q='exit'
 alias cs='clear;ls'
 alias chrome='open -a \"Google Chrome\"'
-alias gr='grep'
-alias p='cat'
-alias lsa='ls -la'
 alias mkdir='mkdir -pv'
 alias ll='ls -lhA'
-alias t='time'
-alias k='kill'
 alias wget='wget -c'  # Continue the download in case of a problem
 alias psg='ps | grep -v grep | grep -i -e VSZ -e'
 alias null='/dev/null'
@@ -46,6 +41,8 @@ alias untar='tar -xvf'
 alias unbz2='tar -xvjf'
 alias ungz='tar -xvzf'
 
+alias netscan="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s"
+
 # Solana
 alias sol-set-devnet='solana config set --url https://api.devnet.solana.com'
 alias sol-get='solana config get'
@@ -55,6 +52,3 @@ alias sol-airdrop='solana airdrop'
 function reload() {
     . $DEV_SETTINGS/profile.sh;
 }
-
-
-alias netscan="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s"
