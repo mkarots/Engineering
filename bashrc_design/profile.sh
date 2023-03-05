@@ -57,9 +57,6 @@ alias unbz2='tar -xvjf'
 alias ungz='tar -xvzf'
 
 
-# Go
-export PATH=$PATH:$(go env GOPATH)/bin
-
 # Local Function aliases
 alias trello='trello_open'
 alias proj='project_open'
