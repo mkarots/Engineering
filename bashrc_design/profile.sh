@@ -1,6 +1,10 @@
 #!/usr/bin/env bash 
 
 
+
+PARENTDIR=$(dirname "$0")
+source "$PARENTDIR"/projects.sh
+
 # PROJECTS and Environment variables
 PROJECTS_ROOT="$HOME/Projects"
 ARACHNE="$PROJECTS_ROOT/arachne"
@@ -54,28 +58,6 @@ alias zshrc='vim $HOME/.zshrc'
 alias term_size='echo "Rows=$(tput lines) Cols=$(tput cols)"'
 alias src='clear;source $ZSH_PROFILE_PATH'
 
-
-# Navigation
-alias home='cd $HOME'
-alias root='cd /'
-alias dtop='cd $HOME/Desktop'
-
-# Project navigation
-alias prj='cd $PROJECTS_ROOT'
-alias exploit='cd $PROJECTS_ROOT/exploit'
-alias engineering='cd $ENGINEERING'
-alias eng=engineering
-alias compilers='cd $COMPILERS'
-alias arachne='cd $ARACHNE'
-alias vraxion='cd $VRAXION'
-alias vraxionapp='cd $VRAXIONAPP'
-alias pylox='cd $PYLOX'
-alias dentapp='cd $DENTAPP'
-alias diagrams='cd $DIAGRAMS'
-alias automalabs-mvp='cd $AUTOMALABS_MVP'
-alias automalabs-landing='cd $AUTOMALABS_LANDING'
-alias proglog='cd $PROGLOG'
-
 # docker aliases
 
 alias docker-clean-containers='docker rm $(docker ps -aq)'
@@ -122,6 +104,8 @@ alias unbz2='tar -xvjf'
 alias ungz='tar -xvzf'
 
 
+# Go
+export PATH=$PATH:$(go env GOPATH)/bin
 
 # Local Function aliases
 alias trello='trello_open'
@@ -318,7 +302,7 @@ function markdown_viewer () {
 alias notes="markdown_viewer"
 
 function reload() {
-    . $SETTINGS/.arcrc_profile;
+    . $SETTINGS/profile.sh;
 }
 
 # Goes up a specified number of directories (i.e 4)
