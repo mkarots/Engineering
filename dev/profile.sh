@@ -50,5 +50,5 @@ alias sol-airdrop='solana airdrop'
 
 
 function reload() {
-    . $DEV_SETTINGS/profile.sh;
+    source $DEV_SETTINGS/profile.sh;
 }
