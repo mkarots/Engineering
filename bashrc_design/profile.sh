@@ -1,42 +1,20 @@
-#!/usr/bin/env bash 
-
-
+#!/usr/bin/env bash
+## Top-level profile script that imports all rest
 
 PARENTDIR=$(dirname "$0")
 source "$PARENTDIR"/projects.sh
+source "$PARENTDIR"/github.sh
+source "$PARENTDIR"/python.sh
+
 
 # PROJECTS and Environment variables
-PROJECTS_ROOT="$HOME/Projects"
-ARACHNE="$PROJECTS_ROOT/arachne"
-ENGINEERING="$PROJECTS_ROOT/Engineering"
-COMPILERS="$PROJECTS_ROOT/compilers"
-VRAXION="$PROJECTS_ROOT/vraxion"
-PYLOX="$PROJECTS_ROOT/pylox"
-VRAXIONAPP="$PROJECTS_ROOT/vraxion-app"
-DENTAPP="$PROJECTS_ROOT/dentapp"
-DIAGRAMS="$PROJECTS_ROOT/diagrams"
-AUTOMALABS_MVP="$PROJECTS_ROOT/solana_related/automalabs/automalabs-mvp"
-AUTOMALABS_LANDING="$PROJECTS_ROOT/solana_related/automalabs/automalabs-landing"
-PROGLOG="$PROJECTS_ROOT/proglog"
-
 SETTINGS="$ENGINEERING/bashrc_design"
 AUTOCOMPLETION_SETTINGS="$SETTINGS/autocompletion_scripts"
 NOTES="$SETTINGS/notes"
-BASH_PROFILE_PATH="$HOME/.bash_profile"
 ZSH_PROFILE_PATH=""$HOME/.zshrc""
 TRELLO_VARS_FILE="$SETTINGS/.trello_vars"
-GITHUB_USERNAME="michael-karotsieris"
-GITHUB_HOME="https://github.com/$GITHUB_USERNAME"
-BOARDS_TRELLO="https://trello.com/michaelkarotsieris/boards"
-COMPILERS_TRELLO="https://trello.com/b/gFL5QAQm/compilers"
-ENGINEERING_TRELLO="https://trello.com/b/MPTBFQzo/engineering"
-
-# Needs to be exported in order to be used by Makefile
-export TWINE_USERNAME="mkarotsieris"
-
 
 # Shortcuts
-
 alias h='history'
 alias c='clear'
 alias q='exit'
@@ -66,31 +44,6 @@ alias dcdown='docker-compose down'
 alias dcupd='docker-compose up -d'
 alias dreset='dcdown && dcupd'
 
-
-# Github aliases
-alias g='git status'
-alias ga='git add -u'
-alias gaa='git add .'
-alias gc='git commit -m'
-alias gcmain='git checkout main'
-alias gm='git merge'
-alias gmm='git merge master'
-alias gpl='git pull'
-alias gph='git push'
-alias gbc='git checkout'
-alias gbcn='git checkout -b'
-alias gb='git branch'
-alias gba='gb -av'
-alias gbd='gb -d'
-alias gbrnm='gb -m'
-alias gl='git log'
-alias gd='git diff'
-alias clone='git clone'
-alias merge='git merge'
-
-# Heroku aliases
-alias gphm='git push heroku master'
-
 # Global function aliases
 alias ping='ping -c 10'
 alias bd='cd "$OLDPWD"'
@@ -111,130 +64,11 @@ export PATH=$PATH:$(go env GOPATH)/bin
 alias trello='trello_open'
 alias proj='project_open'
 alias projc='project_open_with_code'
-alias py=python3
-alias python=python3
-alias pip=pip3
-alias pipr='pip3 install -r requirements.txt'
-alias pybuildpackage='python setup.py sdist bdist_wheel'
-alias pycheckpackage='twine check dist/*'
-alias pypublishpackage='twine upload dist/*'
-alias pyvenv='py -mvenv venv'
-alias pyenv='py -mvenv'
 
 # Solana
-
 alias sol-set-devnet='solana config set --url https://api.devnet.solana.com'
 alias sol-get='solana config get'
 alias sol-airdrop='solana airdrop'
-
-function pypipush() {
-    pybuildpackage && pycheckpackage && pypublishpackage -u $TWINE_USERNAME && rm -rf ./dist ./build
-}
-
-# Helper Functions
-
-function py_version () {
-    py -c "from importlib.metadata import version; print(version('${1}'))"
-}
-function is_github_repo () {
-    if $(git rev-parse --is-inside-work-tree 2>/dev/null ) ; then
-        return 0
-    else
-        return 1
-    fi
-}
-
-get_branchname () {
-    export BRANCH_NAME=$(git symbolic-ref --short HEAD)
-    return $?
-}
-
-get_reponame () {
-    export REPO_NAME=$(basename $(git rev-parse --show-toplevel))
-    return $?
-}
-
-get_repo_root () {
-    export REPO_ROOT=$(git rev-parse --show-toplevel)/.git
-}
-
-get_repo_user () {
-    export REPO_USER=$(echo "$(git remote get-url origin)" | cut -d/ -f1 | cut -d: -f2)
-}
-
-cd () {      
-    builtin cd $1
-    if is_github_repo;then
-        get_repo_root
-        get_reponame
-        get_branchname
-        g;
-    else
-        export BRANCH_NAME=""
-        export REPO_NAME=""
-    fi
-}
-
-pr_exists() {
-    if is_github_repo;then
-        get_repo_root
-        get_reponame
-        get_branchname
-        expectedPrName="$REPO_ROOT/refs/remotes/origin/$BRANCH_NAME"
-        if [ -f "$expectedPrName" ];then
-            return 0
-        fi
-    fi
-    return 1
-}
-
-function git_push () {
-    get_branchname
-    retcode=$?
-    non_push_suffix="_local"
-    # Only push if branch_name was found (my be empty if in detached head state)
-    if [ $retcode -eq 0 ] ; then
-            #Only push if branch_name does not end with the non-push suffix
-            if [[ "$BRANCH_NAME" != *$"non_push_suffix" ]] ; then
-                echo 
-                echo 🚀🚀🚀 Pushing $BRANCH_NAME to origin;
-                echo
-                git push origin "$BRANCH_NAME"
-            fi
-    fi
-}
-
-
-function git_commit_and_push () {
-    shouldOpenWeb=true
-    if is_github_repo;then
-        re="(.)*"
-        if [[ "$1" =~  $re ]]; then
-            get_repo_root
-            get_branchname;
-            get_repo_user;
-            get_reponame;
-            ga ;gc $1;git_push;
-        if [[ "$shouldOpenWeb" = true ]]; then
-                if [[ "$BRANCH_NAME" = "master" ]]; then
-                    open https://github.com/$REPO_USER/$REPO_NAME
-                elif pr_exists;then
-                    open https://github.com/$REPO_USER/$REPO_NAME/pull/$BRANCH_NAME
-                else
-                    open https://github.com/$REPO_USER/$REPO_NAME/compare/$BRANCH_NAME?expand=1
-                fi
-            fi
-        else
-            echo "Bad commit message: " $1
-        fi
-    else
-        exit 1
-    fi
-}
-
-alias gcp="git_commit_and_push"
-alias gcepp=gcp
-
 
 function trello_open () {
     
@@ -254,92 +88,9 @@ function trello_open () {
 }
 
 
-function project_open () {  
-    projectName="$1"
-    if [ "$projectName" = "compilers" ] || [ "$projectName" = "cmp" ]; then
-        cd $PROJECTS_ROOT/"compilers";
-        if is_github_repo;then
-            echo "Found existing github repo..."
-            git log;
-        fi
-
-    fi
-    if [ "$projectName" = "eng" ] || [ "$projectName" = "engineering" ]; then
-        cd $PROJECTS_ROOT/"Engineering"
-        if is_github_repo;then    
-            echo "here" 
-            echo "Found existing github repo..."
-            git log;
-        fi
-    fi
-} 
-
-
-function github_open () {
-    get_reponame
-    chrome $GITHUB_HOME/$REPO_NAME
-}
-
-
-function project_open_with_code () {  
-    projectName="$1"
-    if [ "$projectName" = "compilers" ] || [ "$projectName" = "cmp" ]; then
-        cd $PROJECTS_ROOT/"compilers" && code .;
-
-    fi
-    if [ "$projectName" = "eng" ] || [ "$projectName" = "engineering" ]; then
-        cd $PROJECTS_ROOT/"Engineering" && code .;
-    fi
-} 
-
-function markdown_viewer () {
-    echo "$1"
-    if [ -f "$1" ]; then
-        mdless "$1";
-    fi
-}
-
-alias notes="markdown_viewer"
-
 function reload() {
     . $SETTINGS/profile.sh;
 }
 
-# Goes up a specified number of directories (i.e 4)
-up ()
-{
-local d=""
-	limit=$1
-for ((i=1 ; i <= limit ; i++))
-do
-			d=$d/..
-done
-	d=$(echo $d | sed 's/^\///')
-if [ -z "$d" ]; then
-		d=..
-fi
-cd $d
-}
-
-
-# IP address lookup
-alias whatismyip="whatsmyip"
-function whatsmyip ()
-{
-    # Dumps a list of all IP addresses for every device
-    /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }' |awk -F: '{ print $1 ": " $3 }';
-    # Internal IP Lookup
-    echo -n "Internal IP: " ; /sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}'
-    # External IP Lookup
-    echo -n "External IP: " ; curl http://smart-ip.net/myip
-}
-
-function check_bool() {
-    if $1;then
-        echo "True";
-    else
-        echo "False";
-    fi
-}
 
 alias netscan="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s"
