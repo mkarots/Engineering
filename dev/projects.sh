@@ -5,6 +5,7 @@
 PROJECTS_ROOT="$HOME/Projects"
 ENGINEERING="$PROJECTS_ROOT/Engineering"
 COMPILERS="$PROJECTS_ROOT/compilers"
+GOPL="$PROJECTS_ROOT/gopl"
 VRAXION="$PROJECTS_ROOT/vraxion"
 PYLOX="$PROJECTS_ROOT/pylox"
 DENTAPP="$PROJECTS_ROOT/dentapp"
@@ -23,6 +24,7 @@ alias dentapp='cd $DENTAPP'
 alias diagrams='cd $DIAGRAMS'
 alias engineering='cd $ENGINEERING'
 alias eng=engineering
+alias gopl='cd $GOPL'
 alias noobcash='cd $NOOBCASH'
 alias pylox='cd $PYLOX'
 alias proglog='cd $PROGLOG'
