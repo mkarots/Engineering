@@ -8,6 +8,7 @@ source "$PARENTDIR"/github.sh
 source "$PARENTDIR"/go.sh
 source "$PARENTDIR"/projects.sh
 source "$PARENTDIR"/python.sh
+source "$PARENTDIR"/tools.sh
 
 # PROJECTS and Environment variables
 DEV_SETTINGS="$ENGINEERING/dev"

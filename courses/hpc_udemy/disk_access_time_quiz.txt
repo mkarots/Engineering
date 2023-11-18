@@ -1,0 +1,40 @@
+1000 cylinders,
+10 sectors / track
+HEAD AT cylinder 0
+HEAD MOVES 10μs / cylinder
+DISK ROTATES @ 100Hz
+
+What is the average time to read a randomly chosen byte?
+
+Solution
+---
+
+The time we are looking for is going to be the sum of the time that it takes the head to go to the right cylinder `Tcylinder` and then
+the amount of time it has to wait for the right sector `Tsector` to come under the head.
+
+Ttotal = Tcylinder + Tsector
+
+Tcylinder is the time it takes to move the head to the average cylinder(500)
+
+The head is initially at cylinder 0. We take (999 + 0) / 2 to be the average visited cylinder
+Which means that the byte we have to read is at cylinder 500(rounded)
+
+In order to move the head from cylinder 0 to cylinder 500 we will need
+to move across 500 cylinders therefore it will take
+
+    500 cylinders * 10μs / cylinder = 5000μs = 5ms
+
+Tsector is the average time that it takes for the right sector to rotate under the head
+
+Since there are 10 sectors let's assume an equal distribution between those,
+with the average value being 5.
+Waiting for 5 sectors out of 10 means waiting for half a rotation around the disk. We know that the disk
+rotates at f=100Hz therefore one rotation happens in T = 1/f = 10ms, half of which is 5ms
+
+Therefore the average time to read a randomly chosen byte is 10ms
+
+Worst case scenario:
+
+1000 cylinder -> 10ms
+10 sectors -> 10 ms
+Total: 20ms
