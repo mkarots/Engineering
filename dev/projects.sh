@@ -10,6 +10,7 @@ VRAXION="$PROJECTS_ROOT/vraxion"
 PYLOX="$PROJECTS_ROOT/pylox"
 DENTAPP="$PROJECTS_ROOT/dentapp"
 DIAGRAMS="$PROJECTS_ROOT/diagrams"
+MAS="$PROJECTS_ROOT/mas"
 PROGLOG="$PROJECTS_ROOT/proglog"
 NOOBCASH="$PROJECTS_ROOT/noobcash"
 
@@ -22,6 +23,7 @@ alias dtop='cd $HOME/Desktop'
 alias compilers='cd $COMPILERS'
 alias dentapp='cd $DENTAPP'
 alias diagrams='cd $DIAGRAMS'
+alias mas='cd $MAS'
 alias engineering='cd $ENGINEERING'
 alias eng=engineering
 alias gopl='cd $GOPL'
