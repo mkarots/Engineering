@@ -13,6 +13,7 @@ DIAGRAMS="$PROJECTS_ROOT/diagrams"
 MAS="$PROJECTS_ROOT/mas"
 PROGLOG="$PROJECTS_ROOT/proglog"
 NOOBCASH="$PROJECTS_ROOT/noobcash"
+WAVINGHAND="$PROJECTS_ROOT/wavinghand"
 
 # Project navigation
 alias prj='cd $PROJECTS_ROOT'
@@ -28,6 +29,7 @@ alias engineering='cd $ENGINEERING'
 alias eng=engineering
 alias gopl='cd $GOPL'
 alias noobcash='cd $NOOBCASH'
+alias wavinghand='cd $WAVINGHAND'
 alias pylox='cd $PYLOX'
 alias proglog='cd $PROGLOG'
 alias vraxion='cd $VRAXION'
