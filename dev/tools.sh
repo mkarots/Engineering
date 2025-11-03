@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 #  Open notion in browser
 #  Usage: notion
 
