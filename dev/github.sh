@@ -275,14 +275,3 @@ Configuration:
 EOF
 }
 
-# Export functions so they're available in subshells if needed
-export -f is_git_repo
-export -f get_branchname
-export -f get_reponame
-export -f get_repo_root
-export -f get_repo_user
-export -f remote_branch_exists
-export -f git_push
-export -f git_commit_and_push
-export -f github_open
-export -f github_help
